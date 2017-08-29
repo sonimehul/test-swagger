@@ -1,0 +1,440 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "The following are RESTFUL endpoints that will allow authorized users to watch any page/records by using watch list functionality. To keep users up-to-date on the latest changes, users who are watching any page/record will be notified any changes on the watched list.",
+		"version": "1.0.0",
+		"title": "WatchList Service API",
+		"license": {
+			
+		}
+	},
+	"host": "api-umbrella.prod-iae.bsp.gsa.gov",
+	"basePath": "/comp",
+	"tags":[
+		{
+	      "name": "recorddetail",
+	      "description": "Watchlist Service Rest Controller V 1"
+	    },
+		{
+			"name": "watchlist-notification-trigger",
+			"description": "REST Controller for mananging Notification Trigger"
+		}
+	],
+	"paths": {
+		"/watchlistservice/v1/api/recorddetail/{domainId}/{type}/{recordId}": {
+			"get": {
+				"tags": [
+					"recorddetail"
+				],
+				"summary": "Get record details",
+				"description": "This API returns record details for the provided domainId, type and recordId",
+				"operationId": "getRecordDetailUsingGET",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"*/*"
+				],
+				"parameters": {
+					"name": "recordId",
+					"in": "path",
+					"description": "The ID of the subscribed/unsubscribed record",
+					"required": true,
+					"type": "string"
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/RecordDetail"
+						}
+					},
+					"204": {
+						"description": "No Content"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/watchlistservice/v1/api/recorddetail/{domainId}/{recordId}": {
+			"get": {
+				"tags": [
+					"recorddetail"
+				],
+				"summary": "Get subscription record details for a user",
+				"description": "This API returns record details for the provided domainId and recordId",
+				"operationId": "getRecordDetailUsingGET",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"*/*"
+				],
+				"parameters": {
+					"name": "recordId",
+					"in": "path",
+					"description": "The ID of the subscribed/unsubscribed record",
+					"required": true,
+					"type": "string"
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/RecordDetail"
+						}
+					},
+					"204": {
+						"description": "No Content"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/watchlistservice/v1/api/recorddetail": {
+			"post": {
+				"tags": [
+					"Create a subscription record for a user"
+				],
+				"summary": "Create a new subscription record",
+				"description": "This API creates a new subscription record for a user",
+				"operationId": "createRecordUsingPOST",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"*/*"
+				],
+				"parameters": {
+					"in": "body",
+					"name": "recorddetail",
+					"description": "Details to create a new subscription record",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/PostRecordDetail"
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"$ref": "#/definitions/RecordDetail"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/watchlistservice/v1/api/recorddetail/{id}": {
+			"put": {
+				"tags": [
+					"Update a subscription record for a user"
+				],
+				"summary": "Update a subscription record",
+				"description": "This API updates a subscription record for a user",
+				"operationId": "UpdateRecordUsingPUT",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"*/*"
+				],
+				"parameters": {
+					"in": "body",
+					"name": "recorddetail",
+					"description": "Details to update an existing subscription record",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/PutRecordDetail"
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/RecordDetail"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/watchlistservice/v1/api/notification": {
+			"post": {
+				"tags": [
+					"watchlist-notification-trigger"
+				],
+				"summary": "API to trigger watchlist notifications on record change",
+				"description": "This API creates Notification trigger record",
+				"operationId": "createNotificationTriggerUsingPOST",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json",
+					"application/hal+json"
+				],
+				"parameters": {
+					"in": "body",
+					"name": "trigger",
+					"description": "Body of Notification trigger. Please refer to model schema.",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/NotificationTrigger"
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Resource«NotificationTrigger»"
+						}
+					},
+					"201": {
+						"description": "Created"
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		},
+		"/watchlistservice/v1/api/notification/{id}": {
+			"get": {
+				"tags": [
+					"watchlist-notification-trigger"
+				],
+				"summary": "API to get Notification trigger record details",
+				"description": "This API retrieves Notification trigger record",
+				"operationId": "getNotificationTriggerUsingGET",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json",
+					"application/hal+json"
+				],
+				"parameters": {
+					"name": "id",
+					"in": "path",
+					"description": "Enter the id of the Notification Trigger record. For example: 11.",
+					"required": true,
+					"type": "string"
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Resource«NotificationTrigger»"
+						}
+					},
+					"401": {
+						"description": "Unauthorized"
+					},
+					"403": {
+						"description": "Forbidden"
+					},
+					"404": {
+						"description": "Not Found"
+					}
+				}
+			}
+		}
+	},
+	"securityDefinitions": {
+		"api_key": {
+			"type": "apiKey",
+			"name": "api_key",
+			"in": "query"
+		}
+	},
+	"definitions": {
+		"PostRecordDetail": {
+			"type": "object",
+			"properties": {
+				"domainId": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				},
+				"recordId": {
+					"type": "string"
+				},
+				"frequency": {
+					"type": "string"
+				},
+				"uri": {
+					"type": "string"
+				}
+			}
+		},
+		"PutRecordDetail": {
+			"type": "object",
+			"properties": {
+				"domainId": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				},
+				"recordId": {
+					"type": "string"
+				},
+				"frequency": {
+					"type": "string"
+				},
+				"active": {
+					"type": "string"
+				},
+				"uri": {
+					"type": "string"
+				}
+			}
+		},
+		"RecordDetail": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "integer"
+				},
+				"domainId": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				},
+				"recordId": {
+					"type": "string"
+				},
+				"userId": {
+					"type": "string"
+				},
+				"firstName": {
+					"type": "string"
+				},
+				"lastName": {
+					"type": "string"
+				},
+				"frequency": {
+					"type": "string"
+				},
+				"active": {
+					"type": "string"
+				},
+				"uri": {
+					"type": "string"
+				},
+				"links": {
+					"$ref": "#/definitions/Link"
+				}
+			}
+		},
+		"Resource«NotificationTrigger»": {
+			"type": "object",
+			"properties": {
+				"changeDescription": {
+					"type": "string"
+				},
+				"domainId": {
+					"type": "string"
+				},
+				"id": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"links": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Link"
+					}
+				},
+				"recordId": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				},
+				"userId": {
+					"type": "string"
+				}
+			}
+		},
+		"NotificationTrigger": {
+			"type": "object",
+			"properties": {
+				"changeDescription": {
+					"type": "string"
+				},
+				"domainId": {
+					"type": "string"
+				},
+				"id": {
+					"type": "integer",
+					"format": "int32"
+				},
+				"recordId": {
+					"type": "string"
+				},
+				"type": {
+					"type": "string"
+				},
+				"userId": {
+					"type": "string"
+				}
+			}
+		},
+		"Link": {
+			"type": "object",
+			"properties": {
+				"href": {
+					"type": "string"
+				},
+				"rel": {
+					"type": "string"
+				},
+				"templated": {
+					"type": "boolean"
+				}
+			}
+		}
+	}
+}
