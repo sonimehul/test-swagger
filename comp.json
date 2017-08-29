@@ -5,16 +5,15 @@
 		"version": "1.0.0",
 		"title": "WatchList Service API",
 		"license": {
-			
+
 		}
 	},
 	"host": "api-umbrella.prod-iae.bsp.gsa.gov",
 	"basePath": "/comp",
-	"tags":[
-		{
-	      "name": "recorddetail",
-	      "description": "Watchlist Service Rest Controller V 1"
-	    },
+	"tags": [{
+			"name": "recorddetail",
+			"description": "Watchlist Service Rest Controller V 1"
+		},
 		{
 			"name": "watchlist-notification-trigger",
 			"description": "REST Controller for mananging Notification Trigger"
@@ -35,13 +34,35 @@
 				"produces": [
 					"*/*"
 				],
-				"parameters": {
-					"name": "recordId",
-					"in": "path",
-					"description": "The ID of the subscribed/unsubscribed record",
-					"required": true,
-					"type": "string"
-				},
+				"parameters": [{
+						"name": "X-Auth-Token",
+						"in": "header",
+						"description": "The Authorization header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "domainId",
+						"in": "path",
+						"description": "The domain ID of the subscribed/unsubscribed record",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "type",
+						"in": "path",
+						"description": "The type of the subscribed/unsubscribed record for the domain",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "recordId",
+						"in": "path",
+						"description": "The ID of the subscribed/unsubscribed record",
+						"required": true,
+						"type": "string"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -78,13 +99,28 @@
 				"produces": [
 					"*/*"
 				],
-				"parameters": {
-					"name": "recordId",
-					"in": "path",
-					"description": "The ID of the subscribed/unsubscribed record",
-					"required": true,
-					"type": "string"
-				},
+				"parameters": [{
+						"name": "X-Auth-Token",
+						"in": "header",
+						"description": "The Authorization header",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "domainId",
+						"in": "path",
+						"description": "The domain ID of the subscribed/unsubscribed record",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "recordId",
+						"in": "path",
+						"description": "The ID of the subscribed/unsubscribed record",
+						"required": true,
+						"type": "string"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -121,7 +157,13 @@
 				"produces": [
 					"*/*"
 				],
-				"parameters": {
+				"parameters": [{
+					"name": "X-Auth-Token",
+					"in": "header",
+					"description": "The Authorization header",
+					"required": true,
+					"type": "string"
+				}, {
 					"in": "body",
 					"name": "recorddetail",
 					"description": "Details to create a new subscription record",
@@ -129,7 +171,7 @@
 					"schema": {
 						"$ref": "#/definitions/PostRecordDetail"
 					}
-				},
+				}],
 				"responses": {
 					"201": {
 						"description": "Created",
@@ -163,15 +205,30 @@
 				"produces": [
 					"*/*"
 				],
-				"parameters": {
-					"in": "body",
-					"name": "recorddetail",
-					"description": "Details to update an existing subscription record",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/PutRecordDetail"
+				"parameters": [{
+						"name": "id",
+						"in": "path",
+						"description": "The ID of a subscribed record",
+						"required": true,
+						"type": "integer",
+						"format": "int64"
+					},
+					{
+						"name": "X-Auth-Token",
+						"in": "header",
+						"description": "The Authorization header",
+						"required": true,
+						"type": "string"
+					}, {
+						"in": "body",
+						"name": "recorddetail",
+						"description": "Details to update an existing subscription record",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/PutRecordDetail"
+						}
 					}
-				},
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -206,15 +263,23 @@
 					"application/json",
 					"application/hal+json"
 				],
-				"parameters": {
-					"in": "body",
-					"name": "trigger",
-					"description": "Body of Notification trigger. Please refer to model schema.",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/NotificationTrigger"
+				"parameters": [{
+						"name": "api_key",
+						"in": "query",
+						"description": "API KEY",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "body",
+						"name": "trigger",
+						"description": "Body of Notification trigger. Please refer to model schema.",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/NotificationTrigger"
+						}
 					}
-				},
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -252,13 +317,21 @@
 					"application/json",
 					"application/hal+json"
 				],
-				"parameters": {
-					"name": "id",
-					"in": "path",
-					"description": "Enter the id of the Notification Trigger record. For example: 11.",
-					"required": true,
-					"type": "string"
-				},
+				"parameters": [{
+						"name": "api_key",
+						"in": "query",
+						"description": "API KEY",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "id",
+						"in": "path",
+						"description": "Enter the id of the Notification Trigger record. For example: 11.",
+						"required": true,
+						"type": "string"
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
